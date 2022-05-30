@@ -144,7 +144,7 @@ typedef struct _videoconfig
 {
 /*! \brief resolution id.
 
-    The possible values are:
+    Most commonly used values are:
     - \c VIDEO_RESOLUTION_1080
     - \c VIDEO_RESOLUTION_720
     - \c VIDEO_RESOLUTION_480
@@ -169,8 +169,12 @@ typedef struct _videoconfig
     - \c VIDEO_ASPECT_16_9
 */
     u8 aspect;
+    
 /*! \brief unused. */
-    u8 padding[9];
+    u8 reserved[8];
+    
+/*! \brief refresh rate. */
+    u8 refreshRate;
 
 /*! \brief offset in bytes between the beginnings of consecutive lines.
 */
@@ -211,6 +215,11 @@ typedef struct _videoDeviceInfo
     videoKSVList ksvList;
 } videoDeviceInfo;
 
+typedef struct _videoOption
+{
+    u32 reserved;
+} videoOption;
+
 typedef s32 (*videoCallback)(u32 slot, u32 videoOut, u32 deviceIndex, u32 event, videoDeviceInfo *info, void *userData);
 
 /*! \brief Get video state
@@ -243,13 +252,14 @@ s32 videoGetResolution(s32 resolutionId,videoResolution *resolution);
     \return zero if no error, nonzero otherwise.
     \todo verify the parameters signification.
 */
-s32 videoConfigure(s32 videoOut,videoConfiguration *config,void *option,s32 blocking);
-s32 videoOutConfigure2(s32 videoOut,videoConfiguration *config,void *option,s32 blocking);
+s32 videoConfigure(s32 videoOut,videoConfiguration *config,videoOption *option,s32 blocking);
+s32 videoOutConfigure2(s32 videoOut,videoConfiguration *config,videoOption *option,s32 blocking);
 
 s32 videoGetNumberOfDevice(u32 videoOut);
 s32 videoGetDeviceInfo(u32 videoOut, u32 deviceIndex, videoDeviceInfo *info);
 s32 videoGetConfiguration(u32 videoOut, videoConfiguration *config, void *option);
 s32 videoGetResolutionAvailability(u32 videoOut, u32 resolutionId, u32 aspect, u32 option);
+s32 videoGetResolutionAvailability2(u32 videoOut, u32 resolutionId, u32 aspect, u32 refreshRate);
 s32 videoDebugSetMonitorType(u32 videoOut, u32 monitorType);
 s32 videoGetConvertCursorColorInfo(u8 *rgbOutputRange);
 
