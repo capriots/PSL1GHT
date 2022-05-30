@@ -244,6 +244,7 @@ s32 videoGetResolution(s32 resolutionId,videoResolution *resolution);
     \todo verify the parameters signification.
 */
 s32 videoConfigure(s32 videoOut,videoConfiguration *config,void *option,s32 blocking);
+s32 videoOutConfigure2(s32 videoOut,videoConfiguration *config,void *option,s32 blocking);
 
 s32 videoGetNumberOfDevice(u32 videoOut);
 s32 videoGetDeviceInfo(u32 videoOut, u32 deviceIndex, videoDeviceInfo *info);
