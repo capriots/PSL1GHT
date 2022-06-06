@@ -1,18 +1,30 @@
 #ifndef __EXPORTS_H__
 #define __EXPORTS_H__
 
-/* video support */
-EXPORT(videoGetResolution, 0xe558748d);
-EXPORT(videoConfigure, 0x0bae8772);
-EXPORT(videoGetState, 0x887572d5);
-EXPORT(videoGetDeviceInfo, 0x1e930eef);
-EXPORT(videoGetConfiguration, 0x15b0b0cd);
-EXPORT(videoGetResolutionAvailability, 0xa322db75);
-EXPORT(videoDebugSetMonitorType, 0xcfdf24bb);
-EXPORT(videoRegisterCallbackEx, 0x8e8bc444);
-EXPORT(videoUnregisterCallback, 0x7871bed4);
-EXPORT(videoGetNumberOfDevice, 0x75bbb672);
-EXPORT(videoGetConvertCursorColorInfo, 0x55e425c3);
+/* video output support */
+EXPORT(videoOutGetResolution, 0xe558748d);
+EXPORT(videoOutConfigure, 0x0bae8772);
+EXPORT(videoOutGetState, 0x887572d5);
+EXPORT(videoOutGetDeviceInfo, 0x1e930eef);
+EXPORT(videoOutGetConfiguration, 0x15b0b0cd);
+EXPORT(videoOutGetResolutionAvailability, 0xa322db75);
+EXPORT(videoOutDebugSetMonitorType, 0xcfdf24bb);
+EXPORT(videoOutRegisterCallbackEx, 0x8e8bc444);
+EXPORT(videoOutUnregisterCallback, 0x7871bed4);
+EXPORT(videoOutGetNumberOfDevice, 0x75bbb672);
+EXPORT(videoOutGetConvertCursorColorInfo, 0x55e425c3);
+
+/* audio output support */
+EXPORT(audioOutGetSoundAvailability, 0xc01b4e7c);
+EXPORT(audioOutGetSoundAvailability2, 0x2beac488);
+EXPORT(audioOutGetState, 0xf4e3caa0);
+EXPORT(audioOutConfigure, 0x4692ab35);
+EXPORT(audioOutGetConfiguration, 0x44d2ba34);
+EXPORT(audioOutGetNumberOfDevice, 0xe5e2b09d);
+EXPORT(audioOutGetDeviceInfo, 0x7663e368);
+EXPORT(audioOutSetCopyControl, 0xc96e89e9);
+EXPORT(audioOutRegisterCallback, 0x68bc4ff3);
+EXPORT(audioOutUnregisterCallback, 0x9dfdad46);
 
 /* message dialog support */
 EXPORT(msgDialogClose, 0x20543730);

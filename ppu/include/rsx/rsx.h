@@ -23,8 +23,8 @@ The basic steps for managing the display are the following.
 
  - Create a RSX context (see \ref rsxInit).
  - Configure the video (video mode, color depth, aspect ratio). See
-    \ref videoConfigure for doing this. Default values can be obtained using
-    \ref videoGetState.
+    \ref videoOutConfigure for doing this. Default values can be obtained using
+    \ref videoOutGetState.
  - Set flip mode (see \ref gcmSetFlipMode). To prevent unpleasant flickering,
     you usually want to synchronize screen flipping with vertical refresh (use
     the \ref GCM_FLIP_VSYNC value).

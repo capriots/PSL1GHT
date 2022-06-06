@@ -29,7 +29,7 @@
 #include <assert.h>
 #include <unistd.h>
 
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 #include <rsx/gcm_sys.h>
 #include <rsx/rsx.h>
 

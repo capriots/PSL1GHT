@@ -10,7 +10,7 @@ libjpgdec is used by Eyetoy in Playstation 3 only support JPG format... IPU is a
 #include <assert.h>
 #include <unistd.h>
 
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 #include <rsx/gcm.h>
 #include <rsx/reality.h>
 
@@ -57,11 +57,11 @@ void init_screen() {
 	assert(context != NULL);
 
 	VideoState state;
-	assert(videoGetState(0, 0, &state) == 0); // Get the state of the display
+	assert(videoOutGetState(0, 0, &state) == 0); // Get the state of the display
 	assert(state.state == 0); // Make sure display is enabled
 
 	// Get the current resolution
-	assert(videoGetResolution(state.displayMode.resolution, &res) == 0);
+	assert(videoOutGetResolution(state.displayMode.resolution, &res) == 0);
 	
 	// Configure the buffer format to xRGB
 	VideoConfiguration vconfig;
@@ -71,8 +71,8 @@ void init_screen() {
 	vconfig.pitch = res.width * 4;
 	vconfig.aspect=state.displayMode.aspect;
 
-	assert(videoConfigure(0, &vconfig, NULL, 0) == 0);
-	assert(videoGetState(0, 0, &state) == 0); 
+	assert(videoOutConfigure(0, &vconfig, NULL, 0) == 0);
+	assert(videoOutGetState(0, 0, &state) == 0); 
 
 	s32 buffer_size = 4 * res.width * res.height; // each pixel is 4 bytes
 	

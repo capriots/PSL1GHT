@@ -14,7 +14,7 @@
 
 #include <sysmodule/sysmodule.h>
 #include <sysutil/sysutil.h>
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 #include <rsx/rsx.h>
 #include <rsx/gcm_sys.h>
 #include <spurs/types.h>
@@ -39,7 +39,7 @@ typedef struct {
 buffer *buffers[2];             // The buffer we will be drawing into
 gcmContextData *context;        // Context to keep track of the RSX buffer.
 
-videoResolution res;            // Screen Resolution
+videoOutResolution res;            // Screen Resolution
 
 int currentBuffer = 0;
 
@@ -147,18 +147,18 @@ init_screen ()
   context = rsxInit (0x10000, 1024 * 1024, host_addr);
   assert (context != NULL);
 
-  videoState state;
+  videoOutState state;
 
-  assert (videoGetState (0, 0, &state) == 0);   // Get the state of the display
+  assert (videoOutGetState (0, 0, &state) == 0);   // Get the state of the display
   assert (state.state == 0);    // Make sure display is enabled
 
   // Get the current resolution
-  assert (videoGetResolution (VIDEO_RESOLUTION_1080, &res) == 0);
+  assert (videoOutGetResolution (VIDEO_RESOLUTION_1080, &res) == 0);
 
   // Configure the buffer format to xRGB
-  videoConfiguration vconfig;
+  videoOutConfiguration vconfig;
 
-  memset (&vconfig, 0, sizeof (videoConfiguration));
+  memset (&vconfig, 0, sizeof (videoOutConfiguration));
   vconfig.resolution = VIDEO_RESOLUTION_1080;
   vconfig.format = VIDEO_BUFFER_FORMAT_XRGB;
   vconfig.pitch = res.width * 4;
@@ -166,8 +166,8 @@ init_screen ()
 
   waitRSXIdle ();
 
-  assert (videoConfigure (0, &vconfig, NULL, 0) == 0);
-  assert (videoGetState (0, 0, &state) == 0);
+  assert (videoOutConfigure (0, &vconfig, NULL, 0) == 0);
+  assert (videoOutGetState (0, 0, &state) == 0);
 
   s32 buffer_size = 4 * res.width * res.height; // each pixel is 4 bytes
 

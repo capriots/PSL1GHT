@@ -2,7 +2,7 @@
 #define __RSXUTIL_H__
 
 #include <rsx/rsx.h>
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 
 #define CB_SIZE		0x100000
 #define HOST_SIZE	(32*1024*1024)

@@ -12,7 +12,7 @@
 #include <io/pad.h>
 #include <sys/thread.h>
 #include <sys/memory.h>
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 #include <sysutil/sysutil.h>
 #include <sysutil/save.h>
 #include <string.h>

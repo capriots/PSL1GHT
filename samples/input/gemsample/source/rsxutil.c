@@ -8,7 +8,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <unistd.h>
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 #include <rsx/gcm_sys.h>
 #include <rsx/rsx.h>
 #include <io/pad.h>
@@ -94,12 +94,12 @@ makeBuffer (rsxBuffer * buffer, u16 width, u16 height, int id)
 int
 getResolution (u16 * width, u16 * height)
 {
-  videoState state;
-  videoResolution resolution;
+  videoOutState state;
+  videoOutResolution resolution;
 
   /* Get the state of the display */
-  if (videoGetState (0, 0, &state) == 0 &&
-      videoGetResolution (state.displayMode.resolution, &resolution) == 0) {
+  if (videoOutGetState (0, 0, &state) == 0 &&
+      videoOutGetResolution (state.displayMode.resolution, &resolution) == 0) {
     if (width)
       *width = resolution.width;
     if (height)
@@ -151,9 +151,9 @@ initScreen (void *host_addr, u32 size)
 {
   // gcmContextData *context = NULL; /* Context to keep track of the RSX
   // buffer. */
-  videoState state;
-  videoConfiguration vconfig;
-  videoResolution res;		/* Screen Resolution */
+  videoOutState state;
+  videoOutConfiguration vconfig;
+  videoOutResolution res;		/* Screen Resolution */
 
   /* Initilise Reality, which sets up the command buffer and shared IO memory */
   context = rsxInit (CB_SIZE, size, host_addr);
@@ -161,7 +161,7 @@ initScreen (void *host_addr, u32 size)
     goto error;
 
   /* Get the state of the display */
-  if (videoGetState (0, 0, &state) != 0)
+  if (videoOutGetState (0, 0, &state) != 0)
     goto error;
 
   /* Make sure display is enabled */
@@ -169,11 +169,11 @@ initScreen (void *host_addr, u32 size)
     goto error;
 
   /* Get the current resolution */
-  if (videoGetResolution (state.displayMode.resolution, &res) != 0)
+  if (videoOutGetResolution (state.displayMode.resolution, &res) != 0)
     goto error;
 
   /* Configure the buffer format to xRGB */
-  memset (&vconfig, 0, sizeof (videoConfiguration));
+  memset (&vconfig, 0, sizeof (videoOutConfiguration));
   vconfig.resolution = state.displayMode.resolution;
   vconfig.format = VIDEO_BUFFER_FORMAT_XRGB;
   vconfig.pitch = res.width * sizeof (u32);
@@ -181,10 +181,10 @@ initScreen (void *host_addr, u32 size)
 
   waitRSXIdle (context);
 
-  if (videoConfigure (0, &vconfig, NULL, 0) != 0)
+  if (videoOutConfigure (0, &vconfig, NULL, 0) != 0)
     goto error;
 
-  if (videoGetState (0, 0, &state) != 0)
+  if (videoOutGetState (0, 0, &state) != 0)
     goto error;
 
   gcmSetFlipMode (GCM_FLIP_VSYNC);	// Wait for VSYNC to flip

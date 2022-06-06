@@ -6,11 +6,11 @@
 #include <ppu-types.h>
 
 #include <sys/event_queue.h>
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 
 #include "rsxutil.h"
 
-videoResolution vResolution;
+videoOutResolution vResolution;
 
 u32 curr_fb = 0;
 
@@ -127,20 +127,20 @@ void initVideoConfiguration()
     s32 resId = 0;
 
     for (size_t i=0;i < RESOLUTION_ID_COUNT;i++) {
-        rval = videoGetResolutionAvailability(VIDEO_PRIMARY, sResolutionIds[i], VIDEO_ASPECT_AUTO, 0);
+        rval = videoOutGetResolutionAvailability(VIDEO_PRIMARY, sResolutionIds[i], VIDEO_ASPECT_AUTO, 0);
         if (rval != 1) continue;
 
         resId = sResolutionIds[i];
-        rval = videoGetResolution(resId, &vResolution);
+        rval = videoOutGetResolution(resId, &vResolution);
         if(!rval) break;
     }
 
     if(rval) {
-        printf("Error: videoGetResolutionAvailability failed. No usable resolution.\n");
+        printf("Error: videoOutGetResolutionAvailability failed. No usable resolution.\n");
         exit(1);
     }
 
-    videoConfiguration config = {
+    videoOutConfiguration config = {
         (u8)resId,
         VIDEO_BUFFER_FORMAT_XRGB,
         VIDEO_ASPECT_AUTO,
@@ -148,15 +148,15 @@ void initVideoConfiguration()
         (u32)vResolution.width*4
     };
 
-    rval = videoConfigure(VIDEO_PRIMARY, &config, NULL, 0);
+    rval = videoOutConfigure(VIDEO_PRIMARY, &config, NULL, 0);
     if(rval) {
-        printf("Error: videoConfigure failed.\n");
+        printf("Error: videoOutConfigure failed.\n");
         exit(1);
     }
 
-    videoState state;
+    videoOutState state;
 
-    rval = videoGetState(VIDEO_PRIMARY, 0, &state);
+    rval = videoOutGetState(VIDEO_PRIMARY, 0, &state);
     switch(state.displayMode.aspect) {
         case VIDEO_ASPECT_4_3:
             aspect_ratio = 4.0f/3.0f;

@@ -6,13 +6,13 @@
 #include <ppu-types.h>
 
 #include <rsx/rsx.h>
-#include <sysutil/video.h>
+#include <sysutil/video_out.h>
 
 #include "rsxutil.h"
 
 #define GCM_LABEL_INDEX		255
 
-videoResolution res;
+videoOutResolution res;
 gcmContextData *context = NULL;
 
 u32 curr_fb = 0;
@@ -93,13 +93,13 @@ void init_screen(void *host_addr,u32 size)
 {
 	rsxInit(&context,CB_SIZE,size,host_addr);
 
-	videoState state;
-	videoGetState(0,0,&state);
+	videoOutState state;
+	videoOutGetState(0,0,&state);
 
-	videoGetResolution(state.displayMode.resolution,&res);
+	videoOutGetResolution(state.displayMode.resolution,&res);
 
-	videoConfiguration vconfig;
-	memset(&vconfig,0,sizeof(videoConfiguration));
+	videoOutConfiguration vconfig;
+	memset(&vconfig,0,sizeof(videoOutConfiguration));
 
 	vconfig.resolution = state.displayMode.resolution;
 	vconfig.format = VIDEO_BUFFER_FORMAT_XRGB;
@@ -107,8 +107,8 @@ void init_screen(void *host_addr,u32 size)
 
 	waitRSXIdle();
 
-	videoConfigure(0,&vconfig,NULL,0);
-	videoGetState(0,0,&state);
+	videoOutConfigure(0,&vconfig,NULL,0);
+	videoOutGetState(0,0,&state);
 
 	gcmSetFlipMode(GCM_FLIP_VSYNC);
 
