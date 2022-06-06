@@ -174,12 +174,18 @@ s32 audioGetPortConfig(u32 portNum,audioPortConfig *config);
 */
 s32 audioPortClose(u32 portNum);
 
+s32 audioGetPortBlockTag(u32 portNum, u64 blockNo, u64* tag);
+
+s32 audioSetPortLevel(u32 portNum, float level);
+
 /*! \brief Create a notify event queue for audio events.
 \param eventQ Pointer to the event queue object to be updated.
 \param queueKey Pointer to storage for the returned queue key.
 \return zero if no error, nonzero otherwise.
 */
 s32 audioCreateNotifyEventQueue(sys_event_queue_t *eventQ,sys_ipc_key_t *queueKey);
+
+s32 audioCreateNotifyEventQueueEx(sys_event_queue_t* eventQ, sys_ipc_key_t* queueKey, u32 iFlags);
 
 /*! \brief Set the current event queue for audio events.
 \param queueKey The queue key value (musthave been created using
@@ -188,12 +194,23 @@ s32 audioCreateNotifyEventQueue(sys_event_queue_t *eventQ,sys_ipc_key_t *queueKe
 */
 s32 audioSetNotifyEventQueue(sys_ipc_key_t queueKey);
 
+s32 audioSetNotifyEventQueueEx(sys_ipc_key_t key, u32 iFlags);
+
 /*! \brief Disconnect the current event queue from the audio subsystem.
 \param queueKey The queue key value (must have been created using
    \ref audioCreateNotifyEventQueue).
 \return zero if no error, nonzero otherwise.
 */
 s32 audioRemoveNotifyEventQueue(sys_ipc_key_t queueKey);
+
+s32 audioRemoveNotifyEventQueueEx(sys_ipc_key_t key, u32 iFlags);
+s32 audioAddData(u32 portNum, float *src, u32 samples, float volume);
+s32 audioAdd2chData(u32 portNum, float* src, u32 samples, float volume);
+s32 audioAdd6chData(u32 portNum, float *src, float volume);
+s32 audioMiscSetAccessoryVolume(u32 devNum, float volume);
+s32 audioSendAck(u64 data3);
+s32 audioSetPersonalDevice(s32 iPersonalStream, s32 iDevice);
+s32 audioUnsetPersonalDevice(s32 iPersonalStream);
 
 #ifdef __cplusplus
 	}
