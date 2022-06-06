@@ -38,14 +38,17 @@
 #define VIDEO_OUT_RESOLUTION_1440x1080                        0x0b
 #define VIDEO_OUT_RESOLUTION_1280x1080                        0x0c
 #define VIDEO_OUT_RESOLUTION_960x1080                         0x0d
+// 0x64
 #define VIDEO_OUT_RESOLUTION_720_3D_FRAME_PACKING             0x81
+// 0x82
+#define VIDEO_OUT_RESOLUTION_1080_3D_FRAME_PACKING            0x83
 #define VIDEO_OUT_RESOLUTION_1024x720_3D_FRAME_PACKING        0x88
 #define VIDEO_OUT_RESOLUTION_960x720_3D_FRAME_PACKING         0x89
 #define VIDEO_OUT_RESOLUTION_800x720_3D_FRAME_PACKING         0x8a
 #define VIDEO_OUT_RESOLUTION_640x720_3D_FRAME_PACKING         0x8b
 #define VIDEO_OUT_RESOLUTION_720_DUALVIEW_FRAME_PACKING       0x91
 #define VIDEO_OUT_RESOLUTION_720_SIMULVIEW_FRAME_PACKING      0x91
-// #define ...3D something?... 0x92
+#define VIDEO_OUT_RESOLUTION_1080_3D_SIDE_BY_SIDE             0x92
 #define VIDEO_OUT_RESOLUTION_1024x720_DUALVIEW_FRAME_PACKING  0x98
 #define VIDEO_OUT_RESOLUTION_1024x720_SIMULVIEW_FRAME_PACKING 0x98
 #define VIDEO_OUT_RESOLUTION_960x720_DUALVIEW_FRAME_PACKING   0x99
@@ -65,10 +68,10 @@
 #define VIDEO_OUT_REFRESH_50HZ                                0x02
 #define VIDEO_OUT_REFRESH_60HZ                                0x04
 #define VIDEO_OUT_REFRESH_30HZ                                0x08
-// #define 0x10
-// #define 0x20
-// #define 0x40
-// #define 0x80
+#define VIDEO_OUT_REFRESH_RATE_23_976HZ                       0x10
+#define VIDEO_OUT_REFRESH_RATE_24HZ                           0x20
+// 0x40
+// 0x80
 
 #define VIDEO_OUT_PORT_NONE                                   0x00
 #define VIDEO_OUT_PORT_HDMI                                   0x01
