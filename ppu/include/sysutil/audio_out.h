@@ -32,10 +32,10 @@
 #define AUDIO_OUT_CODING_TYPE_AAC                0x05
 #define AUDIO_OUT_CODING_TYPE_DTS                0x06
 #define AUDIO_OUT_CODING_TYPE_ATRAC              0x07
-// 0x08
+#define AUDIO_OUT_CODING_TYPE_DOLBY_TRUE_HD      0x08
 #define AUDIO_OUT_CODING_TYPE_DOLBY_DIGITAL_PLUS 0x09
-// 0x0a
-// 0x0b
+#define AUDIO_OUT_CODING_TYPE_DTS_HD_HRA         0x0a
+#define AUDIO_OUT_CODING_TYPE_DTS_HD_MA          0x0b
 #define AUDIO_OUT_CODING_TYPE_BITSTREAM          0xff
 
 #define AUDIO_OUT_FS_32KHZ                       0x01
@@ -118,6 +118,15 @@ typedef struct _audioOutConfiguration
     u32 downMixer;
 } audioOutConfiguration;
 
+typedef struct _audioOutConfiguration2
+{
+    u8 channel;
+    u8 encoder;
+    u8 type
+    u8 padding[9];
+    u32 downMixer;
+} audioOutConfiguration2;
+
 typedef struct _audioOutOption
 {
     u32 reserved;
@@ -175,7 +184,7 @@ s32 audioOutGetAvailableDeviceInfo(u32 count, audioOutDeviceInfo2 *info);
 s32 audioOutRegisterDevice(u64 deviceType, const char *name, audioOutRegistrationOption *option, audioOutDeviceConfiguration *config);
 s32 audioOutSetDeviceMode(u32 deviceMode);
 
-s32 audioOutGetConfiguration2(u32 audioOut, audioOutConfiguration *config, audioOutOption *option);
+s32 audioOutGetConfiguration2(u32 audioOut, audioOutConfiguration2 *config2, audioOutOption *option);
 s32 audioOutConfigure2(u32 audioOut, audioOutConfiguration* config, audioOutOption* option, u32 waitForEvent);
 
 #ifdef __cplusplus

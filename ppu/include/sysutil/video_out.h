@@ -38,7 +38,7 @@
 #define VIDEO_OUT_RESOLUTION_1440x1080                        0x0b
 #define VIDEO_OUT_RESOLUTION_1280x1080                        0x0c
 #define VIDEO_OUT_RESOLUTION_960x1080                         0x0d
-// 0x64
+#define VIDEO_OUT_RESOLUTION_WXGA                             0x64
 #define VIDEO_OUT_RESOLUTION_720_3D_FRAME_PACKING             0x81
 // 0x82
 #define VIDEO_OUT_RESOLUTION_1080_3D_FRAME_PACKING            0x83
@@ -160,45 +160,52 @@ typedef struct _videoOutState
 */
 typedef struct _videoOutConfig
 {
-/*! \brief resolution id.
+    /*! \brief resolution id.
 
-    Most commonly used values are:
-    - \c VIDEO_OUT_RESOLUTION_1080
-    - \c VIDEO_OUT_RESOLUTION_720
-    - \c VIDEO_OUT_RESOLUTION_480
-    - \c VIDEO_OUT_RESOLUTION_576
-*/
+        Most commonly used values are:
+        - \c VIDEO_OUT_RESOLUTION_1080
+        - \c VIDEO_OUT_RESOLUTION_720
+        - \c VIDEO_OUT_RESOLUTION_480
+        - \c VIDEO_OUT_RESOLUTION_576
+    */
     u8 resolution;
 
-/*! \brief video buffer format.
+    /*! \brief video buffer format.
 
-    The possible values are:
-    - \c VIDEO_OUT_BUFFER_FORMAT_XRGB
-    - \c VIDEO_OUT_BUFFER_FORMAT_XBGR
-    - \c VIDEO_OUT_BUFFER_FORMAT_FLOAT
-*/
+        The possible values are:
+        - \c VIDEO_OUT_BUFFER_FORMAT_XRGB
+        - \c VIDEO_OUT_BUFFER_FORMAT_XBGR
+        - \c VIDEO_OUT_BUFFER_FORMAT_FLOAT
+    */
     u8 format;
 
-/*! \brief aspect ratio.
+    /*! \brief aspect ratio.
 
-    The possible values are:
-    - \c VIDEO_OUT_ASPECT_AUTO
-    - \c VIDEO_OUT_ASPECT_4_3
-    - \c VIDEO_OUT_ASPECT_16_9
-*/
+        The possible values are:
+        - \c VIDEO_OUT_ASPECT_AUTO
+        - \c VIDEO_OUT_ASPECT_4_3
+        - \c VIDEO_OUT_ASPECT_16_9
+    */
     u8 aspect;
 
-    u8 scanMode2;
-    
-/*! \brief unused. */
-    u8 padding[7];
-    
-    u8 refreshRate;
+    /*! \brief unused. */
+    u8 padding[9];
 
-/*! \brief offset in bytes between the beginnings of consecutive lines.
-*/
+    /*! \brief offset in bytes between the beginnings of consecutive lines.
+    */
     u32 pitch;
 } videoOutConfiguration;
+
+typedef struct _videoOutConfig2
+{
+    u8 resolution;
+    u8 format;
+    u8 aspect;
+    u8 scanMode2;
+    u8 padding[6];
+    u16 refreshRate;
+    u32 pitch;
+} videoOutConfiguration2;
 
 typedef struct _videoOutColorInfo
 {
@@ -291,7 +298,7 @@ s32 videoOutGetGamma(u32 videoOut, f32 *gamma);
 s32 videoOutSetGamma(u32 videoOut, f32 gamma);
 s32 videoOutGetScreenSize(u32 videoOut, f32* screenSize);
 s32 videoOutSetCopyControl(u32 videoOut, u32 control);
-s32 videoOutConfigure2(s32 videoOut, videoOutConfiguration *config, videoOutOption *option, s32 blocking);
+s32 videoOutConfigure2(s32 videoOut, videoOutConfiguration2 *config2, videoOutOption *option, s32 blocking);
 s32 videoOutGetResolutionAvailability2(u32 videoOut, u32 resolutionId, u32 aspect, u32 refreshRate);
 
 #ifdef __cplusplus
