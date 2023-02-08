@@ -246,6 +246,11 @@ typedef struct _videoOutOption
     u32 reserved;
 } videoOutOption;
 
+typedef struct _videoOutOption2
+{
+    u32 reserved[4];
+} videoOutOption2;
+
 typedef s32 (*videoOutCallback)(u32 slot, u32 videoOut, u32 deviceIndex, u32 event, videoOutDeviceInfo *info, void *userData);
 
 /*! \brief Get video state
@@ -298,7 +303,7 @@ s32 videoOutGetGamma(u32 videoOut, f32 *gamma);
 s32 videoOutSetGamma(u32 videoOut, f32 gamma);
 s32 videoOutGetScreenSize(u32 videoOut, f32* screenSize);
 s32 videoOutSetCopyControl(u32 videoOut, u32 control);
-s32 videoOutConfigure2(s32 videoOut, videoOutConfiguration2 *config2, videoOutOption *option, s32 blocking);
+s32 videoOutConfigure2(s32 videoOut, videoOutConfiguration2 *config2, videoOutOption2 *option2, s32 blocking);
 s32 videoOutGetResolutionAvailability2(u32 videoOut, u32 resolutionId, u32 aspect, u32 refreshRate);
 
 #ifdef __cplusplus
