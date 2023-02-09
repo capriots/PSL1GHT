@@ -1,5 +1,4 @@
-#ifndef __LV2_SYSMODULE_H__
-#define __LV2_SYSMODULE_H__
+#pragma once
 
 #include <ppu-types.h>
 
@@ -61,12 +60,10 @@ typedef enum
 	SYSMODULE_ADEC_AC3 = 0x0027,
 	SYSMODULE_ADEC_ATX = 0x0028,
 	SYSMODULE_ADEC_AT3 = 0x0029,
-	SYSMODULE_ADEC_PAMF = 0x002a,
-
-	SYSMODULE_VDEC_AL = 0x002b, // TODO: check
-	SYSMODULE_ADEC_AL = 0x002c, // TODO: check
-	SYSMODULE_DMUX_AL = 0x002d, // TODO: check
-
+	SYSMODULE_DMUX_PAMF = 0x002a,
+	SYSMODULE_VDEC_AL = 0x002b,
+	SYSMODULE_ADEC_AL = 0x002c,
+	SYSMODULE_DMUX_AL = 0x002d,
 	SYSMODULE_LV2DBG = 0x002e,
 
 	SYSMODULE_SYSUTIL_AVCHAT = 0x002f, // TODO: check
@@ -113,44 +110,129 @@ typedef enum
 	SYSMODULE_SYNC2 = 0x0055,
 	SYSMODULE_SYSUTIL_NP_UTIL = 0x0056,
 	SYSMODULE_RUDP = 0x0057,
-	// 0x0058
+	// 0x0058 = unused
 	SYSMODULE_SYSUTIL_NP_SNS = 0x0059,
 	SYSMODULE_GEM = 0x005a,
 	// 0x005b
 	SYSMODULE_SYSUTIL_CROSS_CONTROLLER = 0x005c,
 
-
-	SYSMODULE_CELPENC = 0xf00a,           // libcelpenc(CELP encoder)
-	SYSMODULE_GIFDEC = 0xf010,            // libgifdec(GIF decoder)
-	SYSMODULE_ADEC_CELP = 0xf019,         // libadec(CELP decoder)
-	SYSMODULE_ADEC_M2BC = 0xf01b,         // libadec(MPEG2 BC decoder)
-	SYSMODULE_ADEC_M4AAC = 0xf01d,        // libadec(MPEG4 AAC decoder)
-	SYSMODULE_ADEC_MP3 = 0xf01e,          // libadec(MP3 decoder)
-	SYSMODULE_IMEJP = 0xf023,             // ImeJp utility
-	SYSMODULE_SYSUTIL_MUSIC = 0xf028,     // Music utility(playback using a memory container)
-	SYSMODULE_PHOTO_EXPORT = 0xf029,      // Photo utility(export)
-	SYSMODULE_PRINT = 0xf02a,             // Print utility
-	SYSMODULE_PHOTO_IMPORT = 0xf02b,      // Photo utility(import)
-	SYSMODULE_MUSIC_EXPORT = 0xf02c,      // Music utility(export)
-	SYSMODULE_PHOTO_DECODE = 0xf02e,      // Photo utility(decode)
-	SYSMODULE_SYSUTIL_SEARCH = 0xf02f,    // Content search utility
-	SYSMODULE_SYSUTIL_AVCHAT2 = 0xf030,   // AV chat 2 utility
-	SYSMODULE_SAIL_REC = 0xf034,          // libsail_rec(media recording)
-	SYSMODULE_SYSUTIL_NP_EULA = 0xf044,   // NP EULA utility
-	SYSMODULE_SYSUTIL_NP_TROPHY = 0xf035, // NP trophy utility
-	SYSMODULE_LIBATRAC3MULTI = 0xf054,
-
 	SYSMODULE_INVALID = 0xffff,
 } sysModuleId;
 
+typedef enum
+{
+	SYSMODULE_INTERNAL_AT3ENC = 0xf000,               //
+	SYSMODULE_INTERNAL_ATXENC = 0xf001,               //
+	SYSMODULE_INTERNAL_VDEC_AL = 0xf002,              //
+	SYSMODULE_INTERNAL_VPOST_INTERNAL = 0xf003,       //
+	SYSMODULE_INTERNAL_MP3ENC = 0xf004,               //
+	SYSMODULE_INTERNAL_AACENC = 0xf005,               //
+	SYSMODULE_INTERNAL_ADEC_AL_INTERNAL = 0xf006,     //
+	// 0xf007, internal/libapostsrc.sprx
+	SYSMODULE_INTERNAL_AUDIO_INTERNAL = 0xf008,       //
+	// 0xf009, external/libavchatjpgdec.sprx
+	SYSMODULE_INTERNAL_CELPENC = 0xf00a,              // libcelpenc(CELP encoder)
+	// 0xf00b, internal/libddlenc.sprx
+	SYSMODULE_INTERNAL_DMUX_AL = 0xf00c,              //
+	// 0xf00d, internal/libexif.sprx
+	// 0xf00e, internal/libft2d.sprx
+	// 0xf00f, internal/libgcm_osd.sprx
+	SYSMODULE_INTERNAL_GIFDEC = 0xf010,               // libgifdec(GIF decoder)
+	SYSMODULE_INTERNAL_JPGDEC = 0xf011,               //
+	SYSMODULE_INTERNAL_JPGENC = 0xf012,               //
+	SYSMODULE_INTERNAL_M4VENC = 0xf013,               //
+	SYSMODULE_INTERNAL_PAMF = 0xf014,                 //
+	SYSMODULE_INTERNAL_PNGDEC = 0xf015,               //
+	SYSMODULE_INTERNAL_PNGENC = 0xf016,               //
+	// 0xf017, internal/libps2savedata.sprx
+	SYSMODULE_INTERNAL_TIFFDEC = 0xf018,              //
+	SYSMODULE_INTERNAL_ADEC_CELP = 0xf019,            // libadec(CELP decoder)
+	SYSMODULE_INTERNAL_ADEC_DTS = 0xf01a,             // DO NOT USE
+	SYSMODULE_INTERNAL_ADEC_M2BC = 0xf01b,            // libadec(MPEG2 BC decoder)
+	SYSMODULE_INTERNAL_ADEC_M2AAC = 0xf01c,           //
+	SYSMODULE_INTERNAL_ADEC_M4AAC = 0xf01d,           // libadec(MPEG4 AAC decoder)
+	SYSMODULE_INTERNAL_ADEC_MP3 = 0xf01e,             // libadec(MP3 decoder)
+	SYSMODULE_INTERNAL_ADEC_TRUEHD = 0xf01f,          //
+	SYSMODULE_INTERNAL_VDEC_VC1 = 0xf020,             // REQUIRES PARAMSFO FLAG ??? // VC-1 decoder // TODO: check
+	SYSMODULE_INTERNAL_VDEC_MPEG4 = 0xf021,           // MPEG-4 Part 2 video decoder                // TODO: check
+	SYSMODULE_INTERNAL_SYSUTIL_REMOTEPLAY = 0xf022,   //
+	SYSMODULE_INTERNAL_IMEJP = 0xf023,                // ImeJp utility
+	SYSMODULE_INTERNAL_ADEC_WMA = 0xf024,             // REQUIRES PARAMSFO FLAG ???
+	// 0xf025, internal/libasfparser.sprx
+	SYSMODULE_INTERNAL_ADEC_EAC3 = 0xf026,            // Dolby Digital Plus decoder
+	SYSMODULE_INTERNAL_ADEC_DTSLBR_INTERNAL = 0xf027, // DTS Express decoder, uses internal/libdtslbrdec.sprx
+	SYSMODULE_INTERNAL_SYSUTIL_MUSIC = 0xf028,        // Music utility(playback using a memory container)
+	SYSMODULE_INTERNAL_PHOTO_EXPORT = 0xf029,         // Photo utility(export)
+	SYSMODULE_INTERNAL_PRINT = 0xf02a,                // Print utility
+	SYSMODULE_INTERNAL_PHOTO_IMPORT = 0xf02b,         // Photo utility(import)
+	SYSMODULE_INTERNAL_MUSIC_EXPORT = 0xf02c,         // Music utility(export)
+	SYSMODULE_INTERNAL_AVCENC_SMALL = 0xf02d,         //
+	SYSMODULE_INTERNAL_PHOTO_DECODE = 0xf02e,         // Photo utility(decode)
+	SYSMODULE_INTERNAL_SYSUTIL_SEARCH = 0xf02f,       // Content search utility
+	SYSMODULE_INTERNAL_SYSUTIL_AVCHAT2 = 0xf030,      // AV chat 2 utility
+	// 0xf031, external/libmp4.sprx
+	SYSMODULE_INTERNAL_SYSUTIL_RTCALARM = 0xf032,     //
+	// 0xf033, external/libavcenc_small.sprx
+	SYSMODULE_INTERNAL_SAIL_REC = 0xf034,             // libsail_rec(media recording)
+	SYSMODULE_INTERNAL_SYSUTIL_NP_TROPHY = 0xf035,    // NP trophy utility
+	// 0xf036, external/libsjvtd.sprx, video decoder // Motion JPEG?
+	SYSMODULE_INTERNAL_ADEC_DTSHD = 0xf037,           //
+	SYSMODULE_INTERNAL_ADEC_MP3S = 0xf038,            // MP3 Surround decoder
+	SYSMODULE_INTERNAL_SAIL_AVI = 0xf039,             //
+	SYSMODULE_INTERNAL_AVCENC = 0xf03a,               //
+	// 0xf03b, external/libapostsrc_mini.sprx
+	SYSMODULE_INTERNAL_VOICE_INTERNAL = 0xf03c,       //
+	// 0xf03d, external/libmpl1dec.sprx, audio decoder
+	// 0xf03e, external/libasfparser2_astd.sprx // REQUIRES PARAMSFO FLAG ???
+	SYSMODULE_INTERNAL_ADEC2_AL = 0xf03f,             //
+	SYSMODULE_INTERNAL_ADEC2_AC3 = 0xf040,            //
+	SYSMODULE_INTERNAL_ADEC2_ATX = 0xf041,            //
+	// 0xf042, internal/libdivx311dec.sprx, video decoder
+	SYSMODULE_INTERNAL_VPOST2 = 0xf043,               //
+	SYSMODULE_INTERNAL_SYSUTIL_NP_EULA = 0xf044,      // NP EULA utility
+	SYSMODULE_INTERNAL_SYSUTIL_STORAGEDATA = 0xf045,  //
+	SYSMODULE_INTERNAL_M4HDENC = 0xf046,              // MPEG-4 Advanced Coding Efficiency encoder
+	SYSMODULE_INTERNAL_SYSUTIL_SAVEDATA_PSP = 0xf047, //
+	SYSMODULE_INTERNAL_SYSUTIL_VIDEO_PLAYER = 0xf048, //
+	SYSMODULE_INTERNAL_VDEC_MVC = 0xf049,             //
+	// 0xf04a, external/libaacenc_spurs.sprx
+	// 0xf04b, internal/libdtshdcoredec.sprx, audio decoder
+	// 0xf04c, internal/libpidvd.sprx
+	SYSMODULE_INTERNAL_SYSUTIL_DTCP_IP = 0xf04d,      //
+	SYSMODULE_INTERNAL_SYSUTIL_SYSCHAT = 0xf04e,      //
+	SYSMODULE_INTERNAL_SYSUTIL_NP_INSTALLER = 0xf04f, //
+	// 0xf050, external/libbemp2sys.sprx
+	// 0xf051, external/libbeisobmf.sprx
+	SYSMODULE_INTERNAL_PHOTO_EXPORT2 = 0xf052,        //
+	SYSMODULE_INTERNAL_ADEC_AT3MULTI = 0xf053,        //
+	SYSMODULE_INTERNAL_LIBATRAC3MULTI = 0xf054,       //
+	SYSMODULE_INTERNAL_SYSUTIL_DEC_PSNVIDEO = 0xf055, //
+	SYSMODULE_INTERNAL_ADEC_DTSLBR = 0xf056,          // DTS Express decoder, uses external/libdtslbrdec.sprx
+} sysModuleInternalId;
+
+s32 sysModuleInitialize();
+s32 sysModuleFinalize();
 
 s32 sysModuleLoad(sysModuleId id);
 s32 sysModuleUnload(sysModuleId id);
 s32 sysModuleIsLoaded(sysModuleId id);
 
+s32 sysModuleGetImagesize(u16 unk1, u32 *unk2);
+s32 sysModuleFetchImage(u16 unk1, void *unk2, u32 *unk3);
+s32 sysModuleSetMemcontainer(u32 ct);
+
+s32 sysModuleLoadInternal(sysModuleInternalId id);
+s32 sysModuleUnloadInternal(sysModuleInternalId id);
+s32 sysModuleLoadEx(sysModuleInternalId id);
+s32 sysModuleUnloadEx(sysModuleInternalId id);
+s32 sysModuleIsLoadedEx(sysModuleInternalId id);
+
+s32 sysModule_0x002CD0BF(); // Does nothing
+s32 sysModule_0x03D90241(u32 unk); // Sets library directory to /app_home if unk == 1, else /dev_flash/sys
+s32 sysModule_0x205FE2A0(u32 *unk);
+s32 sysModule_0x59521326(void *unk);
+s32 sysModule_0xC93200DE(u8 *unk1, u32 *unk2);
 
 #ifdef __cplusplus
 	}
-#endif
-
 #endif

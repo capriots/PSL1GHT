@@ -13,5 +13,17 @@ EXPORT(sysModuleGetImagesize, 0x1ef115ef);
 EXPORT(sysModuleFetchImage, 0x3c92be09);
 EXPORT(sysModuleSetMemcontainer, 0xa193143c);
 
+EXPORT(sysModuleLoadInternal, 0xd9b8c0ee);
+EXPORT(sysModuleUnloadInternal, 0xb498bf77);
+EXPORT(sysModuleLoadEx, 0x1a267f98);
+EXPORT(sysModuleUnloadEx, 0xfd0e1cac);
+EXPORT(sysModuleIsLoadedEx, 0x70e319b5);
+
+EXPORT(sysModule_0x002CD0BF, 0x002cd0bf);
+EXPORT(sysModule_0x03D90241, 0x03d90241);
+EXPORT(sysModule_0x205FE2A0, 0x205fe2a0);
+EXPORT(sysModule_0x59521326, 0x59521326);
+EXPORT(sysModule_0xC93200DE, 0xc93200de);
+
 
 #endif
