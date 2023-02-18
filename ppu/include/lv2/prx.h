@@ -2,8 +2,7 @@
  \brief dynamic libraries.
 */
 
-#ifndef __LV2_PRX_H__
-#define __LV2_PRX_H__
+#pragma once
 
 #include <ppu-types.h>
 #include <sys/prx.h>
@@ -31,7 +30,5 @@ sysPrxId sysPrxGetModuleIdByName(const char *name, sysPrxFlags flags, sysPrxGetM
 
 #ifdef __cplusplus
 	}
-#endif
-
 #endif
 

@@ -2,8 +2,7 @@
  \brief dynamic libraries.
 */
 
-#ifndef __LV2_PRX_H__
-#define __LV2_PRX_H__
+#pragma once
 
 #include <ppu-types.h>
 #include <lv2/prx.h>
@@ -122,7 +121,5 @@ typedef struct sys_prx_module_info_t {
 
 #ifdef __cplusplus
 	}
-#endif
-
 #endif
 
